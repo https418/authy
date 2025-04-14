@@ -1,7 +1,7 @@
-package io.github.https418.authy.adapter.out.memory;
+package io.github.https418.authy.infrastructure.drivenadapters.shared.persistence;
 
 import io.github.https418.authy.domain.model.User;
-import io.github.https418.authy.domain.port.out.UserRepository;
+import io.github.https418.authy.domain.repository.UserRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 
@@ -15,7 +15,7 @@ public class InMemoryUserRepository implements UserRepository {
 
     @Override
     public Mono<User> save(User user) {
-        users.put(user.username(), user);
+        users.put(user.username().value(), user);
         return Mono.just(user);
     }
 

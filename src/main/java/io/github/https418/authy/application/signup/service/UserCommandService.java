@@ -1,22 +1,22 @@
-package io.github.https418.authy.application.service;
+package io.github.https418.authy.application.signup.service;
 
 import io.github.https418.authy.domain.exception.UserAlreadyExistsException;
 import io.github.https418.authy.domain.model.User;
-import io.github.https418.authy.domain.port.in.UserUseCase;
-import io.github.https418.authy.domain.port.out.UserRepository;
+import io.github.https418.authy.domain.repository.UserRepository;
+import io.github.https418.authy.domain.usecase.UserCommandUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
-public class UserService implements UserUseCase {
+public class UserCommandService implements UserCommandUseCase {
 
     private final UserRepository userRepository;
 
     @Override
     public Mono<User> signUp(User user) {
-        return userRepository.existsByUsername(user.username())
+        return userRepository.existsByUsername(user.username().value())
                 .flatMap(exist -> {
                     if (Boolean.TRUE.equals(exist))
                         return Mono.error(new UserAlreadyExistsException("El usuario ya se encuentra registrado."));
@@ -24,9 +24,4 @@ public class UserService implements UserUseCase {
                 });
     }
 
-    @Override
-    public Mono<User> signIn(String username, String password) {
-        return userRepository.findByUsername(username)
-                .filter(user -> user.password().equals(password));
-    }
 }

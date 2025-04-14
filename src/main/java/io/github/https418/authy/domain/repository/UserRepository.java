@@ -1,4 +1,4 @@
-package io.github.https418.authy.domain.port.out;
+package io.github.https418.authy.domain.repository;
 
 import io.github.https418.authy.domain.model.User;
 import reactor.core.publisher.Mono;
