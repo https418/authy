@@ -1,8 +1,0 @@
-package io.github.https418.authy.domain.model;
-
-import io.github.https418.authy.domain.model.valueobject.Email;
-import io.github.https418.authy.domain.model.valueobject.Password;
-import io.github.https418.authy.domain.model.valueobject.Username;
-
-public record User(Username username, Email email, Password password) {
-}
