@@ -1,23 +1,24 @@
 package io.github.https418.authy.domain.usecase.signin;
 
-import io.github.https418.authy.domain.model.signin.gateway.SigninUserGateway;
-import io.github.https418.authy.domain.model.signin.model.SigninUserRecord;
-import io.github.https418.authy.infrastructure.drivenadapters.datastructure.shared.infra.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import io.github.https418.authy.domain.model.shared.common.cqrs.ContextData;
+import io.github.https418.authy.domain.model.shared.common.cqrs.Query;
+import io.github.https418.authy.domain.model.signin.model.exception.InvalidCredentialsException;
+import io.github.https418.authy.domain.model.signin.gateway.SigninSearchGateway;
+import io.github.https418.authy.domain.model.signin.model.SigninUser;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
-@Service
-@RequiredArgsConstructor
-public class SigninUseCase implements SigninUserGateway {
+@Component
+@AllArgsConstructor
+public class SigninUseCase {
 
-    private final UserRepository repository;
+    private final SigninSearchGateway signinSearchGateway;
 
-    @Override
-    public Mono<SigninUserRecord> signIn(SigninUserRecord user) {
-        return repository.findByUsername(user.username().value())
-                .filter(foundUser -> foundUser.password().value().equals(user.password().value()))
-                .flatMap(validatedUser -> Mono.just(new SigninUserRecord(validatedUser.username(), validatedUser.password())));
+    public Mono<Void> signIn(Query<SigninUser, ContextData> query) {
+        return signinSearchGateway.findUser(query)
+                .switchIfEmpty(Mono.error(new InvalidCredentialsException("Credenciales inválidas")))
+                .then();
     }
 
 }

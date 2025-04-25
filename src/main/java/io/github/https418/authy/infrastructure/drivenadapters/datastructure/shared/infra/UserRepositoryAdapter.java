@@ -1,6 +1,6 @@
 package io.github.https418.authy.infrastructure.drivenadapters.datastructure.shared.infra;
 
-import io.github.https418.authy.infrastructure.drivenadapters.datastructure.shared.domain.model.User;
+import io.github.https418.authy.infrastructure.drivenadapters.datastructure.shared.domain.UserData;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 
@@ -10,12 +10,12 @@ import java.util.concurrent.ConcurrentHashMap;
 @Repository
 public class UserRepositoryAdapter implements UserRepository {
 
-    private final Map<String, User> users = new ConcurrentHashMap<>();
+    private final Map<String, UserData> users = new ConcurrentHashMap<>();
 
     @Override
-    public Mono<User> save(User user) {
-        users.put(user.username().value(), user);
-        return Mono.just(user);
+    public Mono<UserData> save(UserData userData) {
+        users.put(userData.username().value(), userData);
+        return Mono.just(userData);
     }
 
     @Override
@@ -24,7 +24,7 @@ public class UserRepositoryAdapter implements UserRepository {
     }
 
     @Override
-    public Mono<User> findByUsername(String username) {
+    public Mono<UserData> findByUsername(String username) {
         return Mono.justOrEmpty(users.get(username));
     }
 

@@ -1,6 +1,6 @@
 package io.github.https418.authy.infrastructure.entrypoints.reactiveweb.signup.application;
 
-import io.github.https418.authy.domain.model.shared.model.common.exception.UserAlreadyExistsException;
+import io.github.https418.authy.domain.model.signup.model.exception.UserAlreadyExistsException;
 import io.github.https418.authy.domain.usecase.signup.SignupUseCase;
 import io.github.https418.authy.infrastructure.entrypoints.reactiveweb.signup.domain.mapper.HadlerRequestSignup;
 import io.github.https418.authy.infrastructure.entrypoints.reactiveweb.signup.domain.request.SignupRequest;

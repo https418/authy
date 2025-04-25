@@ -1,6 +1,6 @@
-package io.github.https418.authy.domain.model.shared.value;
+package io.github.https418.authy.domain.model.shared.common.value;
 
-import io.github.https418.authy.domain.model.shared.model.common.exception.InvalidPasswordException;
+import io.github.https418.authy.domain.model.shared.common.exception.InvalidPasswordException;
 
 import java.util.regex.Pattern;
 

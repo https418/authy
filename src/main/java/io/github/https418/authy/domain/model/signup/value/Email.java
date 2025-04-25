@@ -1,6 +1,6 @@
 package io.github.https418.authy.domain.model.signup.value;
 
-import io.github.https418.authy.domain.model.shared.model.common.exception.InvalidEmailException;
+import io.github.https418.authy.domain.model.signup.model.exception.InvalidEmailException;
 
 import java.util.regex.Pattern;
 

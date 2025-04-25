@@ -1,4 +1,4 @@
-package io.github.https418.authy.domain.model.shared.model.common.exception;
+package io.github.https418.authy.domain.model.signup.model.exception;
 
 public class UserAlreadyExistsException extends RuntimeException {
 

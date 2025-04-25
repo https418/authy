@@ -1,4 +1,4 @@
-package io.github.https418.authy.domain.model.shared.value;
+package io.github.https418.authy.domain.model.shared.common.value;
 
 public record Username(String value) {
 
